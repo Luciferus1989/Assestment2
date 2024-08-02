@@ -39,5 +39,5 @@ def main():
 
 
 if __name__ == '__main__':
-    print('Change from feature-z')
+    print('Change from feature-z. Final changes')
     main()
