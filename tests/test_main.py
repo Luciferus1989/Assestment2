@@ -1,8 +1,11 @@
 import unittest
 from unittest.mock import patch, AsyncMock
 import os
-
+from pathlib import Path
 from main import get_all_cats, save_to_disk, main
+
+
+OUT_PATH = Path(__file__).parent.parent / 'cats'
 
 
 class TestCatFunctions(unittest.IsolatedAsyncioTestCase):
@@ -19,13 +22,14 @@ class TestCatFunctions(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(result), 10)
 
     def test_save_to_disk(self):
-        if not os.path.exists('cats'):
-            os.makedirs('cats')
+        if not OUT_PATH.exists():
+            OUT_PATH.mkdir(parents=True)
         content = b"test content"
         save_to_disk(content, 1)
-        with open("cats/1.png", "rb") as f:
+        file_path = OUT_PATH / "1.png"
+        with open(file_path, "rb") as f:
             self.assertEqual(f.read(), content)
-        os.remove("cats/1.png")
+        file_path.unlink()
 
     def test_main_function(self):
         main()
