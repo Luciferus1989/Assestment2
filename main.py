@@ -36,6 +36,7 @@ def main():
     end_time = time.time()
     print(len(res))
     print(f"Downloaded {len(res)} cats in {end_time - start_time:.2f} seconds")
+    return CATS_WE_WANT, end_time - start_time
 
 
 if __name__ == '__main__':
