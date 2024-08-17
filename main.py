@@ -12,7 +12,6 @@ OUT_PATH = OUT_PATH.absolute()
 
 async def get_cat(client: aiohttp.ClientSession, idx: int) -> bytes:
     async with client.get(URL) as response:
-        print(response.status)
         result = await response.read()
         await asyncio.to_thread(save_to_disk, result, idx)
 
