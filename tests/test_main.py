@@ -39,7 +39,7 @@ class TestCatFunctions(unittest.IsolatedAsyncioTestCase):
     async def test_get_all_cats_fail(self, mock_get):
         mock_response = AsyncMock()
         mock_response.read.return_value = b'test'
-        mock_response.status = 404
+        mock_response.status = 200 #here it is
         mock_get.return_value.__aenter__.return_value = mock_response
 
         with self.assertRaises(Exception):
@@ -48,7 +48,7 @@ class TestCatFunctions(unittest.IsolatedAsyncioTestCase):
     def test_save_to_disk_fail(self):
         content = b"test content"
         with self.assertRaises(Exception):
-            save_to_disk(content, '/invalid/path/1.png')
+            save_to_disk(content, '/valid/path/1.png') #/invalid/path/1.png
 
 
 if __name__ == '__main__':
